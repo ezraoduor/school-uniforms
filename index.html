@@ -1,73 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Siaya School Uniforms</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siaya School Uniforms - Quality School Supplies & Uniforms</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
+  <div class="header-top">
     <div class="container">
-      <h1>Siaya School Uniforms</h1>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <div class="header-top-content">
+        <div class="phone">
+          <span>📞</span>
+          <a href="tel:0721304180" style="color: inherit; text-decoration: none;">0721304180</a>
+
+        </div>
+        <button class="login-btn">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">SU</div>
+          <div class="logo-text">
+            <h1>SIAYA</h1>
+            <p>School Uniforms Limited</p>
+          </div>
+        </div>
+        <div class="search-section">
+          <input type="text" class="search-box" placeholder="Search for products">
+          <button class="search-btn">🔍 Search</button>
+        </div>
+        <button class="basket-btn">
+          🛒 Basket
+          <span style="background: white; color: #d32f2f; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <section id="home" class="hero">
+  <nav class="nav-menu">
     <div class="container">
-      <h2>Your One-Stop Shop for School, Work & Sports Uniforms</h2>
-      <p>Quality. Comfort. Style. All in one place.</p>
+      <div class="nav-items">
+        <a href="#" class="nav-item">IT Solutions</a>
+        <a href="#" class="nav-item">Stationery</a>
+        <a href="#" class="nav-item">Uniform Department</a>
+        <a href="#" class="nav-item">Footwear</a>
+        <a href="#" class="nav-item">Text Books</a>
+        <a href="#" class="nav-item">Sports Department</a>
+        <a href="#" class="nav-item">Bags</a>
+        <a href="#" class="nav-item">Personal Effects</a>
+        <a href="#" class="nav-item">Other Educational Items</a>
+        <a href="#" class="nav-item">Junior Secondary Textbooks-Grade 9</a>
+      </div>
     </div>
-  </section>
+  </nav>
 
-  <section id="about" class="about">
+  <main class="main-content">
     <div class="container">
-      <h2>About Us</h2>
-      <p>At Siaya School Uniforms, we specialize in providing top-quality uniforms for schools, professional workplaces, and sports teams. Our mission is to ensure everyone looks smart and feels confident in what they wear.</p>
-    </div>
-  </section>
+      <h2 class="section-title">Shop by category</h2>
+      <div class="categories-grid">
+        <div class="category-card"><div class="category-icon">📝</div><div class="category-title">Stationery</div></div>
+        <div class="category-card"><div class="category-icon">💻</div><div class="category-title">IT Solutions</div></div>
+        <div class="category-card"><div class="category-icon">👔</div><div class="category-title">Uniform Department</div></div>
+        <div class="category-card"><div class="category-icon">📚</div><div class="category-title">Text Books</div></div>
+        <div class="category-card"><div class="category-icon">⚽</div><div class="category-title">Sports Department</div></div>
+        <div class="category-card"><div class="category-icon">🎒</div><div class="category-title">Bags</div></div>
+      </div>
 
-  <section id="products" class="products">
-    <div class="container">
-      <h2>Our Products</h2>
-      <div class="product-categories">
-        <div class="product">
-          <h3>School Uniforms</h3>
-          <p>Durable and neat designs for all school levels.</p>
+      <div class="products-section">
+        <h2 class="section-title">Our best sellers</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">👔</div>
+            <div class="product-info">
+              <div class="product-name">Boys White School Shirt Long Sleeved</div>
+              <div class="product-price">KES 650</div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">📖</div>
+            <div class="product-info">
+              <div class="product-name">Mathematics Textbook Grade 7-9</div>
+              <div class="product-price">KES 890</div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">👟</div>
+            <div class="product-info">
+              <div class="product-name">Black School Shoes Leather</div>
+              <div class="product-price">KES 1,250</div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">📓</div>
+            <div class="deal-badge">DEAL</div>
+            <div class="product-info">
+              <div class="product-name">Exercise Books Pack of 10</div>
+              <div class="product-price">KES 320</div>
+            </div>
+          </div>
         </div>
-        <div class="product">
-          <h3>Work Uniforms</h3>
-          <p>Professional attire for various industries.</p>
-        </div>
-        <div class="product">
-          <h3>Sports Uniforms</h3>
-          <p>Flexible, breathable gear for teams and individuals.</p>
+      </div>
+
+      <div class="brands-section">
+        <h2 class="section-title">Top Brands</h2>
+        <div class="brands-grid">
+          <div class="brand-card"><h3>Bata</h3><p>Quality Footwear</p></div>
+          <div class="brand-card"><h3>Longhorn</h3><p>Educational Books</p></div>
+          <div class="brand-card"><h3>Oxford</h3><p>Stationery & Books</p></div>
+          <div class="brand-card"><h3>Hewlett Packard</h3><p>IT Solutions</p></div>
         </div>
       </div>
     </div>
-  </section>
+  </main>
 
-  <section id="contact" class="contact">
+  <!-- Google Maps Prompt Section -->
+  <div class="map-section" style="background: #f5f5f5; padding: 40px 0; text-align: center;">
     <div class="container">
-      <h2>Contact Us</h2>
-      <p>Email: info@siayauniforms.com</p>
-      <p>Phone: +254 721304180</p>
-      <p>Location: Siaya Town, Kenya</p>
+      <h2 style="margin-bottom: 10px;">📍 Visit Us in Siaya Town</h2>
+      <p style="margin-bottom: 20px;">Use the map below to find our exact location and plan your visit.</p>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6559359395087!2d34.2806734!3d0.0575418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177fe3ccb8e3dfb7%3A0xf6ef603021e8b359!2sSiaya%20school%20Uniforms!5e0!3m2!1sen!2ske!4v1721555702000!5m2!1sen!2ske" 
+        width="100%"
+        height="200"
+        style="border:0; border-radius: 10px; max-width: 800px;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
-  </section>
+  </div>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Siaya School Uniforms. All rights reserved.</p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Siaya School Uniforms</h3>
+          <p>We are your one-stop shop for all school supplies, uniforms, and educational materials in Siaya County. Quality products at affordable prices.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <p>📍 Siaya Town, Kenya</p>
+          <p>📞 0721304180</p>
+          <p>✉️ info@siayaschooluniforms.co.ke</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="#">About Us</a></p>
+          <p><a href="#">Delivery Info</a></p>
+          <p><a href="#">Return Policy</a></p>
+          <p><a href="#">Contact Us</a></p>
+        </div>
+        <div class="footer-section">
+          <h3>Customer Service</h3>
+          <p>Mon-Fri: 8:00 AM - 6:00 PM</p>
+          <p>Sat: 8:00 AM - 4:00 PM</p>
+          <p>Sun: Closed</p>
+        </div>
+      </div>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
