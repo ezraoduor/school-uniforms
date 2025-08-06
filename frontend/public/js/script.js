@@ -1,5 +1,5 @@
 // API base URL
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://school-uniforms-backend.onrender.com';
 
 let cart = [];
 
