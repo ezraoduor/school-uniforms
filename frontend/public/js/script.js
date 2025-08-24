@@ -235,12 +235,13 @@ function loadProducts() {
    const products = [
     { id: 1, name: "Badge", price: 60, category: "school", description: "Size: All", inStock: true, image: "images/badge.jpg" },
     { id: 2, name: "Bedcover", price: 650, category: "school", description: "Size: School-size", inStock: true, image: "images/bedcover.jpg" },
-    { id: 3, name: "Bedsheet", price: 250, category: "school", description: "Size: School-size", inStock: true, image: "images/bedsheet.jpg" },
-   
-    { id: 5, name: "Blanket", price: 850, category: "school", description: "Size: Light", inStock: true, image: "images/blanket.jpg" },
-    { id: 7, name: "Blazer", price: 2400, category: "secondary", description: "Size: All (Secondary schools)", inStock: true, image: "images/blazer.jpg" },
+    { id: 3, name: "Bedsheet", price: 600, category: "school", description: "Size: School-size", inStock: true, image: "images/bedsheet.jpg" },
+   { id: 4, name: "Blanket", price: 550, category: "school", description: "Size: Light", inStock: true, image: "images/blanket.jpg" },
+   { id: 5, name: "Blanket", price: 750, category: "school", description: "Size: Heavy", inStock: true, image: "images/blanket.jpg" },
+   { id: 6, name: "Blazer", price: 1500, category: "secondary", description: "Size: All (Secondary schools) without lining", inStock: true, image: "images/blazer.jpg" },
+    { id: 7, name: "Blazer", price: 2100, category: "secondary", description: "Size: All (Secondary schools) with lining", inStock: true, image: "images/blazer.jpg" },
 
-    { id: 9, name: "Fleece Jacket/Jumper", price: 2100, category: "secondary", description: "Size: Secondary (with logo)", inStock: true, image: "images/fleece-jacket.jpg" },
+    { id: 9, name: "Fleece Jacket/Jumper", price: 2400, category: "secondary ", description: "Size: Secondary (with logo)", inStock: true, image: "images/fleece-jacket.jpg" },
     { id: 10, name: "Same Skirt", price: 2100, category: "school", description: "Size: 36-40", inStock: true, image: "images/skirt-large.jpg" },
     { id: 11, name: "Same Skirt", price: 1850, category: "school", description: "Size: 30-34", inStock: true, image: "images/skirt-medium.jpg" },
     { id: 12, name: "Same Skirt", price: 1700, category: "school", description: "Size: 24-28", inStock: true, image: "images/skirt-small.jpg" },
