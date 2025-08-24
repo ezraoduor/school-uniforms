@@ -246,22 +246,23 @@ function loadProducts() {
     { id: 11, name: "Fleece Jacket", price: 2000, category: "school", description: "Size: 30-34", inStock: true, image: "images/download.jpeg" },
     { id: 12, name: "Fleece Jacket", price: 1850, category: "school", description: "Size: 24-28", inStock: true, image: "images/images.jpeg" },
    
-    { id: 14, name: "Shirt (Secondary)", price: 500, category: "secondary", description: "Size: Plain (Without badge)", inStock: true, image: "images/shirt-secondary-plain.jpg"  },
-    { id: 15, name: "Shirt-short-sleeved (Secondary, )", price: 550, category: "secondary", description: "Size: With badge", inStock: true, image: "images/shirt-secondary-badge.jpg" },
-    { id: 16, name: "Shirt-short-sleeved (ECD, )", price: 450, category: "ecd", description: "Size: Plain", inStock: true, image: "images/shirt-ecd-plain.jpg" },
+    { id: 14, name: "Shirt-short-sleeved (Secondary)", price: 500, category: "secondary", description: "Size: Plain (Without badge)", inStock: true, image: "images/shirt-secondary-plain.jpg"  },
+    { id: 15, name: "Shirt-short-sleeved (Secondary)", price: 550, category: "secondary", description: "Size: With badge", inStock: true, image: "images/shirt-secondary-badge.jpg" },
+    { id: 16, name: "Shirt-short-sleeved (ECD)", price: 450, category: "ecd", description: "Size: Plain", inStock: true, image: "images/shirt-ecd-plain.jpg" },
     { id: 17, name: "Shirt-short-sleeved (Primary)", price: 600, category: "primary", description: "Size: Checked", inStock: true, image: "images/shirt-primary-checked.jpg" },
     { id: 18, name: "Shirt-short-sleeved (Primary)", price: 550, category: "primay", description: "Size: Checked", inStock: true, image: "images/shirt-ecd-checked1.jpg" },
-    { id: 19, name: "Shirt-short-sleeved (Primary)", price: 500, category: "primary", description: "Size: Checked", inStock: true, image: "images/shirt-primary-checked-alt.jpg" },
+    { id: 19, name: "Shirt-short-sleeved (Primary)", price: 500, category: "primary", description: "Size: Checked(24-26)", inStock: true, image: "images/shirt-primary-checked-alt.jpg" },
     { id: 20, name: "Shirt-long-sleeved (Secondary)", price: 600, category: "secondary", description: "Size: Without badge", inStock: true, image: "images/shirt-secondary-no-badge.jpg" },
     { id: 21, name: "Shirt-long-sleeved (Secondary)", price: 650, category: "secondary", description: "Size: With badge", inStock: true, image: "images/shirt-secondary-with-badge.jpg" },
     { id: 22, name: "Shorts", price: 700, category: "secondary", description: "Size: Secondary", inStock: true, image: "images/shorts-secondary.jpg" },
     { id: 23, name: "Shorts", price: 600, category: "secondary", description: "Size: L (waist 30-33)", inStock: true, image: "images/shorts-large.jpg" },
     { id: 24, name: "Shorts", price: 500, category: "secondary", description: "Size: M (waist 26-29)", inStock: true, image: "images/shorts-medium.jpg" },
     { id: 25, name: "Shorts", price: 450, category: "secondary", description: "Size: S (waist 18-25)", inStock: true, image: "images/shorts-small.jpg" },
-    { id: 26, name: "Sweater (Short-sleeved)", price: 900, category: "school", description: "Size: Without badge", inStock: true, image: "images/sweater-short-no-badge.jpg" },
-    { id: 27, name: "Sweater (Short-sleeved)", price: 950, category: "school", description: "Size: With badge", inStock: true, image: "images/sweater-short-badge.jpg" },
+    { id: 26, name: "Windbreakers", price: 900, category: "school", description: "Size: Without badge", inStock: true, image: "images/sweater-short-no-badge.jpg" },
+    { id: 27, name: "Windbreakers", price: 950, category: "school", description: "Size: With badge", inStock: true, image: "images/sweater-short-badge.jpg" },
     { id: 28, name: "Sweater (Long-sleeved)", price: 650, category: "school", description: "Size: 22-24", inStock: true, image: "images/sweater-long-22-24.jpg" },
-    { id: 29, name: "Sweater (Long-sleeved)", price: 700, category: "school", description: "Size: 26", inStock: true, image: "images/sweater-long-26.jpg" },
+    { id: 29, name: "Sweater (Long-sleeved)", price: 700, category: "school", description: "Size: 26", inStock: true, image: "images/download (4).jpeg" },
+    { id: 69, name: "Branded Sweater (Long-sleeved)", price: 1200, category: "school", description: "Size: 26", inStock: true, image: "images/sweater-long-26.jpg" },
     { id: 30, name: "Sweater (Long-sleeved)", price: 750, category: "school", description: "Size: 28", inStock: true, image: "images/sweater-long-28.jpg" },
     { id: 31, name: "Sweater (Long-sleeved)", price: 800, category: "school", description: "Size: 30", inStock: true, image: "images/sweater-long-30.jpg" },
     { id: 32, name: "Sweater (Long-sleeved)", price: 850, category: "school", description: "Size: 32", inStock: true, image: "images/sweater-long-32.jpg" },
@@ -295,9 +296,16 @@ function loadProducts() {
     { id: 59, name: "T-Shirt (Primary/ECD)", price: 450, category: "secondary", description: "Size: Printed", inStock: true, image: "images/tshirt-secondary-printed.jpg" },
     { id: 60, name: "T-Shirt (Primary/ECD)", price: 500, category: "secondary", description: "Size: Printed", inStock: true, image: "images/tshirt-secondary-printed.jpg" },
 
-
+    
     { id: 61, name: "Vest", price: 200, category: "school", description: "", inStock: true, image: "images/vest.jpg" },
     { id: 53, name: "Towel", price: 550, category: "school", description: "Size: Heavy", inStock: true, image: "images/towel.jpg" },
+    { id: 62, name: "Lab coats", price: 1500, category: "school", description: "", inStock: true, image: "images/labcoats.jpg" },
+    { id: 63, name: "Dustcoats", price: 1500, category: "school", description: "", inStock: true, image: "images/dustcoats.jpg" },
+    { id: 64, name: "Overalls", price: 1800-2500, category: "school", description: "", inStock: true, image: "images/overalls.jpg" },
+    { id: 65, name: "Chef coats", price: 1800, category: "school", description: "", inStock: true, image: "images/chefcoats.jpg" },
+    { id: 66, name: "KMTC Dresses", price: 1800, category: "school", description: "", inStock: true, image: "images/KMTC cardigans.jpg" },
+    { id: 67, name: "KMTC Cardigans", price: 1600, category: "school", description: "", inStock: true, image: "images/KMTC dresses.jpg" },
+    { id: 68, name: "Scrubs", price: 2000, category: "school", description: "", inStock: true, image: "images/scrubs.jpg" },
    
     ];
 
