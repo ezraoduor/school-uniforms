@@ -252,6 +252,26 @@ body {
     font-size: 1.1rem;
     cursor: pointer;
 }
+.service-section {
+  display: flex;
+  justify-content: center;  /* horizontal center */
+  align-items: center;      /* vertical center */
+           /* full screen height */
+}
+
+.branding-servies {
+  text-align: center;
+}
+
+.branding-machine{
+   width: 100%;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9f9;
+}
 
 /* Modal */
 .modal {
