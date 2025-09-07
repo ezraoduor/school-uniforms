@@ -302,7 +302,7 @@ function loadProducts() {
     { id: 53, name: "Towel", price: 550, category: "school", description: "Size: Heavy", inStock: true, image: "images/towel.jpg" },
     { id: 62, name: "Lab coats", price: 1500, category: "school", description: "", inStock: true, image: "images/labcoats.jpg" },
     { id: 63, name: "Dustcoats", price: 1500, category: "school", description: "", inStock: true, image: "images/dustcoats.jpg" },
-    { id: 64, name: "Overalls", price: 1800-2500, category: "school", description: "", inStock: true, image: "images/overalls.jpg" },
+    { id: 64, name: "Overalls", price: 2000, category: "school", description: "", inStock: true, image: "images/overalls.jpg" },
     { id: 65, name: "Chef coats", price: 1800, category: "school", description: "", inStock: true, image: "images/chefcoats.jpg" },
     { id: 66, name: "KMTC Dresses", price: 1800, category: "school", description: "", inStock: true, image: "images/KMTC dresses.jpg" },
     { id: 67, name: "KMTC Cardigans", price: 1600, category: "school", description: "", inStock: true, image: "images/KMTC cardigans.jpg" },
