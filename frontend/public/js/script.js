@@ -489,6 +489,6 @@ function loadProducts() {
     { id: 67, name: "Scrubs", price: 2000, category: "school", description: "", inStock: true, image: "images/scrubs.jpg" },
    
     ];
-    
+
     displayProducts(products);
 }
