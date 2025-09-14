@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer'); // moved to the top
 require('dotenv').config();
 
 const Product = require('./models/Product');
@@ -20,6 +20,46 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
+
+// Function to send order email
+async function sendOrderEmail(order) {
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_APP_PASSWORD
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.GMAIL_USER,
+            to: process.env.NOTIFY_EMAIL, // Email that receives order notifications
+            subject: `New Order from ${order.customerName}`,
+            text: `
+New order received!
+
+Customer: ${order.customerName}
+Phone: ${order.phone}
+Email: ${order.email || 'N/A'}
+School: ${order.school || 'N/A'}
+Address: ${order.address || 'N/A'}
+Notes: ${order.notes || 'N/A'}
+
+Items:
+${order.items.map(item => `- ${item.name} x ${item.quantity}`).join('\n')}
+
+Total: KSH ${order.total}
+Order Date: ${order.createdAt}
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log('✅ Order email sent!');
+    } catch (error) {
+        console.error('❌ Failed to send order email:', error);
+    }
+}
 
 // Routes
 app.get('/', (req, res) => {
@@ -84,46 +124,6 @@ app.post('/api/contact', (req, res) => {
         message: 'Thank you for your inquiry! We will contact you soon.' 
     });
 });
-
-// Function to send order email
-async function sendOrderEmail(order) {
-    try {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_APP_PASSWORD
-            }
-        });
-
-        const mailOptions = {
-            from: process.env.GMAIL_USER,
-            to: process.env.NOTIFY_EMAIL, // Email that receives order notifications
-            subject: `New Order from ${order.customerName}`,
-            text: `
-New order received!
-
-Customer: ${order.customerName}
-Phone: ${order.phone}
-Email: ${order.email || 'N/A'}
-School: ${order.school || 'N/A'}
-Address: ${order.address || 'N/A'}
-Notes: ${order.notes || 'N/A'}
-
-Items:
-${order.items.map(item => `- ${item.name} x ${item.quantity}`).join('\n')}
-
-Total: KSH ${order.total}
-Order Date: ${order.createdAt}
-            `
-        };
-
-        await transporter.sendMail(mailOptions);
-        console.log('✅ Order email sent!');
-    } catch (error) {
-        console.error('❌ Failed to send order email:', error);
-    }
-}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
