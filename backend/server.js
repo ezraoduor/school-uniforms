@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const Product = require('./models/Product');
@@ -51,12 +52,17 @@ app.post('/api/orders', async (req, res) => {
         const order = new Order(req.body);
         await order.save();
         console.log('New order saved:', order);
+
+        // Send email notification
+        await sendOrderEmail(order);
+
         res.json({ 
             success: true, 
             message: 'Order received successfully!',
             orderId: order._id
         });
     } catch (error) {
+        console.error('Error placing order:', error);
         res.status(400).json({ error: error.message });
     }
 });
@@ -79,27 +85,22 @@ app.post('/api/contact', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-});
-const nodemailer = require('nodemailer');
-
 // Function to send order email
 async function sendOrderEmail(order) {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_APP_PASSWORD
-        }
-    });
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_APP_PASSWORD
+            }
+        });
 
-    const mailOptions = {
-        from: process.env.GMAIL_USER,
-        to: process.env.NOTIFY_EMAIL, // Your Gmail or phone-email
-        subject: `New Order from ${order.customerName}`,
-        text: `
+        const mailOptions = {
+            from: process.env.GMAIL_USER,
+            to: process.env.NOTIFY_EMAIL, // Email that receives order notifications
+            subject: `New Order from ${order.customerName}`,
+            text: `
 New order received!
 
 Customer: ${order.customerName}
@@ -112,13 +113,19 @@ Notes: ${order.notes || 'N/A'}
 Items:
 ${order.items.map(item => `- ${item.name} x ${item.quantity}`).join('\n')}
 
-Subtotal: KSH ${order.subtotal}
-Delivery Fee: KSH ${order.deliveryFee}
 Total: KSH ${order.total}
-Order Date: ${order.orderDate}
-        `
-    };
+Order Date: ${order.createdAt}
+            `
+        };
 
-    await transporter.sendMail(mailOptions);
-    console.log('✅ Order email sent!');
+        await transporter.sendMail(mailOptions);
+        console.log('✅ Order email sent!');
+    } catch (error) {
+        console.error('❌ Failed to send order email:', error);
+    }
 }
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});
