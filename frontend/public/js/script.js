@@ -1,7 +1,9 @@
 // API base URL
 const API_URL = 'https://school-uniforms-backend.onrender.com';
+const DELIVERY_FEE = 200
 
 let cart = [];
+
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -12,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load products from backend API
 async function loadProductsFromAPI() {
     try {
-        const response = await fetch(`${API_URL}/products`);
+        const response = await fetch(`${API_URL}/api/products`);
         const products = await response.json();
         displayProducts(products);
     } catch (error) {
@@ -136,31 +138,153 @@ function removeFromCart(productId) {
 }
 
 // Checkout function
-async function checkout() {
+function checkout() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
     }
     
-    const customerName = prompt('Enter your full name:');
-    if (!customerName) return;
+    // Show checkout section
+    document.getElementById('checkout-section').style.display = 'block';
     
-    const phone = prompt('Enter your phone number:');
-    if (!phone) return;
+    // Populate checkout cart items and calculate total
+    displayCheckoutItems();
+    calculateCheckoutTotal();
     
-    const email = prompt('Enter your email (optional):') || '';
+    // Clear any previous messages
+    document.getElementById('checkout-error').style.display = 'none';
+    document.getElementById('checkout-success').style.display = 'none';
     
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // Reset form
+    document.getElementById('checkout-form').reset();
     
+    // Scroll to top
+    document.getElementById('checkout-section').scrollTop = 0;
+}
+
+function closeCheckout() {
+    document.getElementById('checkout-section').style.display = 'none';
+}
+
+function displayCheckoutItems() {
+    const container = document.getElementById('checkout-cart-items');
+    
+    if (cart.length === 0) {
+        container.innerHTML = '<p>No items in cart</p>';
+        return;
+    }
+
+    container.innerHTML = cart.map(item => `
+        <div class="checkout-cart-item">
+            <div class="item-info">
+                <strong>${item.name}</strong>
+                <br>
+                <small>Size: ${item.size || 'N/A'} | Qty: ${item.quantity}</small>
+            </div>
+            <div class="item-price">
+                KSH ${(item.price * item.quantity).toLocaleString()}
+            </div>
+        </div>
+    `).join('');
+}
+
+function calculateCheckoutTotal() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryFee = cart.length > 0 ? DELIVERY_FEE : 0;
+    const total = subtotal + deliveryFee;
+
+    document.getElementById('checkout-subtotal').textContent = `KSH ${subtotal.toLocaleString()}`;
+    document.getElementById('checkout-delivery').textContent = `KSH ${deliveryFee.toLocaleString()}`;
+    document.getElementById('checkout-total').textContent = `KSH ${total.toLocaleString()}`;
+}
+
+function showCheckoutError(message) {
+    const errorDiv = document.getElementById('checkout-error');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+    
+    // Scroll to top to show error
+    document.getElementById('checkout-section').scrollTop = 0;
+    
+    // Hide after 5 seconds
+    setTimeout(() => {
+        errorDiv.style.display = 'none';
+    }, 5000);
+}
+
+function showCheckoutSuccess(message) {
+    const successDiv = document.getElementById('checkout-success');
+    successDiv.textContent = message;
+    successDiv.style.display = 'block';
+    
+    // Scroll to top to show success
+    document.getElementById('checkout-section').scrollTop = 0;
+}
+
+async function placeOrder() {
+    console.log('Place order function called');
+    
+    // Validate form
+    const form = document.getElementById('checkout-form');
+    if (!form.checkValidity()) {
+        console.log('Form validation failed');
+        form.reportValidity();
+        return;
+    }
+
+    // Get form data
+    const formData = new FormData(form);
+    const customerName = formData.get('customerName');
+    const phone = formData.get('phone');
+    const email = formData.get('email') || '';
+    const school = formData.get('school') || '';
+    const address = formData.get('address') || '';
+    const notes = formData.get('notes') || '';
+
+    console.log('Form data collected:', { customerName, phone, email, school, address, notes });
+
+    // Check if cart exists and has items
+    if (!cart || cart.length === 0) {
+        showCheckoutError('Cart is empty or not defined');
+        return;
+    }
+
+    console.log('Current cart:', cart);
+
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const deliveryFee = DELIVERY_FEE;
+    const total = subtotal + deliveryFee;
+
     const orderData = {
         customerName,
         phone,
         email,
+        school,
+        address,
+        notes,
         items: cart,
-        total
+        subtotal,
+        deliveryFee,
+        total,
+        orderDate: new Date().toISOString()
     };
+
+    console.log('Order data prepared:', orderData);
+    console.log('API URL:', API_URL);
+
+    // Show loading state
+    const placeOrderBtn = document.getElementById('place-order-btn');
+    const btnText = document.getElementById('order-btn-text');
+    const btnLoading = document.getElementById('order-btn-loading');
     
+    if (placeOrderBtn) placeOrderBtn.disabled = true;
+    if (btnText) btnText.style.display = 'none';
+    if (btnLoading) btnLoading.style.display = 'inline';
+
     try {
+        console.log('Sending request to:', `${API_URL}/orders`);
+        console.log('Request body:', JSON.stringify(orderData));
+
         const response = await fetch(`${API_URL}/orders`, {
             method: 'POST',
             headers: {
@@ -168,23 +292,86 @@ async function checkout() {
             },
             body: JSON.stringify(orderData)
         });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            alert(`Order placed successfully!\nOrder ID: ${result.orderId}\nTotal: KSH ${total.toLocaleString()}\n\nWe will contact you shortly!`);
-            cart = [];
-            updateCartUI();
-            closeCart();
-        } else {
-            alert('Error placing order. Please try again.');
+
+        console.log('Response received:', response);
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+
+        // Get response text first to see what we're getting
+        const responseText = await response.text();
+        console.log('Raw response text:', responseText);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}, response: ${responseText}`);
         }
+
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(responseText);
+            console.log('Parsed JSON result:', result);
+        } catch (parseError) {
+            console.error('Failed to parse JSON:', parseError);
+            throw new Error(`Invalid JSON response: ${responseText}`);
+        }
+
+        if (result && result.success) {
+            // Show success message
+            showCheckoutSuccess(`Order placed successfully! Order ID: ${result.orderId || 'N/A'}. We will contact you shortly at ${phone}.`);
+            
+            // Clear cart
+            cart = [];
+            if (typeof updateCartUI === 'function') {
+                updateCartUI(); // Your existing function to update cart display
+            }
+            
+            // Hide the place order button and form
+            if (placeOrderBtn) placeOrderBtn.style.display = 'none';
+            form.style.display = 'none';
+            
+            // Auto-close checkout after 3 seconds
+            setTimeout(() => {
+                closeCheckout();
+                // Reset everything for next order
+                if (placeOrderBtn) placeOrderBtn.style.display = 'block';
+                form.style.display = 'block';
+                const successDiv = document.getElementById('checkout-success');
+                if (successDiv) successDiv.style.display = 'none';
+            }, 3000);
+            
+        } else {
+            throw new Error(result?.message || 'Server returned success: false');
+        }
+
     } catch (error) {
         console.error('Error placing order:', error);
-        alert('Error placing order. Please check your connection.');
+        showCheckoutError(`Error: ${error.message}`);
+    } finally {
+        // Reset button state
+        if (placeOrderBtn) placeOrderBtn.disabled = false;
+        if (btnText) btnText.style.display = 'inline';
+        if (btnLoading) btnLoading.style.display = 'none';
     }
 }
-
+function testOrderSetup() {
+    console.log('=== Order Setup Test ===');
+    console.log('API_URL:', API_URL);
+    console.log('DELIVERY_FEE:', DELIVERY_FEE);
+    console.log('Cart exists:', typeof cart !== 'undefined');
+    console.log('Cart contents:', cart);
+    console.log('Checkout form exists:', !!document.getElementById('checkout-form'));
+    console.log('Place order button exists:', !!document.getElementById('place-order-btn'));
+    console.log('========================');
+}
+// Optional: Close checkout when clicking outside
+document.addEventListener('click', function(event) {
+    const checkoutSection = document.getElementById('checkout-section');
+    const checkoutContainer = document.querySelector('.checkout-container');
+    
+    if (event.target === checkoutSection && !checkoutContainer.contains(event.target)) {
+        closeCheckout();
+    }
+});
 // Scroll to products section
 function scrollToProducts() {
     document.getElementById('products').scrollIntoView({

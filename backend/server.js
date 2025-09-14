@@ -7,23 +7,25 @@ const Product = require('./models/Product');
 const Order = require('./models/Order');
 
 const app = express();
-const port = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('✅ Connected to MongoDB'))
-    .catch(err => console.error('❌ MongoDB connection error:', err));
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('✅ Connected to MongoDB'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Routes
 app.get('/', (req, res) => {
     res.json({ message: 'Siaya School Uniforms API is running!' });
 });
 
-// Get all products from database
+// Products
 app.get('/api/products', async (req, res) => {
     try {
         const products = await Product.find();
@@ -33,7 +35,6 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
-// Add a new product (for testing)
 app.post('/api/products', async (req, res) => {
     try {
         const product = new Product(req.body);
@@ -44,14 +45,12 @@ app.post('/api/products', async (req, res) => {
     }
 });
 
-// Create order
+// Orders
 app.post('/api/orders', async (req, res) => {
     try {
         const order = new Order(req.body);
         await order.save();
-        
         console.log('New order saved:', order);
-        
         res.json({ 
             success: true, 
             message: 'Order received successfully!',
@@ -62,7 +61,6 @@ app.post('/api/orders', async (req, res) => {
     }
 });
 
-// Get all orders
 app.get('/api/orders', async (req, res) => {
     try {
         const orders = await Order.find().sort({ createdAt: -1 });
@@ -72,7 +70,7 @@ app.get('/api/orders', async (req, res) => {
     }
 });
 
-// Contact form
+// Contact
 app.post('/api/contact', (req, res) => {
     console.log('New inquiry:', req.body);
     res.json({ 

@@ -97,6 +97,85 @@
             </div>
         </div>
     </div>
+
+    <div id="checkout-section" class="checkout-section" style="display: none;">
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h2>Checkout</h2>
+            <button class="close-checkout" onclick="closeCheckout()">×</button>
+        </div>
+
+        <div id="checkout-error" class="error-message" style="display: none;"></div>
+        <div id="checkout-success" class="success-message" style="display: none;"></div>
+
+        <div class="checkout-content">
+            <!-- Customer Information Form -->
+            <div class="customer-info">
+                <h3>Customer Information</h3>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="customerName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="customerPhone" name="phone" required placeholder="0712345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerEmail">Email Address</label>
+                        <input type="email" id="customerEmail" name="email" placeholder="Optional">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerSchool">School Name</label>
+                        <input type="text" id="customerSchool" name="school" placeholder="Optional">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deliveryAddress">Delivery Address</label>
+                        <textarea id="deliveryAddress" name="address" rows="3" placeholder="Optional"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNotes">Special Instructions</label>
+                        <textarea id="orderNotes" name="notes" rows="2" placeholder="Optional"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div id="checkout-cart-items"></div>
+                <div class="total-section">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="checkout-subtotal">KSH 0</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Delivery Fee:</span>
+                        <span id="checkout-delivery">KSH 200</span>
+                    </div>
+                    <div class="total-row final-total">
+                        <span>Total:</span>
+                        <span id="checkout-total">KSH 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-buttons">
+            <button type="button" class="btn-secondary" onclick="closeCheckout()">Back to Cart</button>
+            <button type="button" class="btn-primary" id="place-order-btn" onclick="placeOrder()">
+                <span id="order-btn-text">Place Order</span>
+                <span id="order-btn-loading" style="display: none;">Processing...</span>
+            </button>
+        </div>
+    </div>
+</div>
+
 <div class="map-section" style="background: #f5f5f5; padding: 40px 0; text-align: center;">
     <div class="container">
       <h2 style="margin-bottom: 10px;">📍 Visit Us in Siaya Town</h2>
