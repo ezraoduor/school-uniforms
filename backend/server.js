@@ -83,3 +83,42 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
+const nodemailer = require('nodemailer');
+
+// Function to send order email
+async function sendOrderEmail(order) {
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_APP_PASSWORD
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.GMAIL_USER,
+        to: process.env.NOTIFY_EMAIL, // Your Gmail or phone-email
+        subject: `New Order from ${order.customerName}`,
+        text: `
+New order received!
+
+Customer: ${order.customerName}
+Phone: ${order.phone}
+Email: ${order.email || 'N/A'}
+School: ${order.school || 'N/A'}
+Address: ${order.address || 'N/A'}
+Notes: ${order.notes || 'N/A'}
+
+Items:
+${order.items.map(item => `- ${item.name} x ${item.quantity}`).join('\n')}
+
+Subtotal: KSH ${order.subtotal}
+Delivery Fee: KSH ${order.deliveryFee}
+Total: KSH ${order.total}
+Order Date: ${order.orderDate}
+        `
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log('✅ Order email sent!');
+}
